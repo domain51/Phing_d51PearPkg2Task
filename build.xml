@@ -51,4 +51,17 @@
         <delete dir="./build/phing" />
         <tar compression="gzip" destfile="Phing_d51PearPkg2-${version}.tgz" basedir="./build" />
     </target>
+    
+    <target name="docs" depends="export">
+        <echo msg="Creating documentation" />
+        <phpdoc title="Phing_d51PearPkg2 Docs" 
+            destdir="./apidocs"
+            sourcecode="./build"
+            output="HTML:frames:DOM/earthli"
+        >
+            <fileset dir="./build">
+                <include name="**" />
+            </fileset>
+        </phpdoc>
+    </target>
 </project>

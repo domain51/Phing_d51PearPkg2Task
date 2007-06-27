@@ -7,7 +7,7 @@
  * 
  * @package phing.tasks.ext
  * 
- * @subpackage Domain51 Extensions
+ * @subpackage d51pearkpkg2
  * 
  */
 

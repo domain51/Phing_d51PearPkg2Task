@@ -29,8 +29,10 @@ require_once 'phing/tasks/ext/d51PearPkg2/Version.php';
 /**
  * This class provides the d51pearpkg2 task for phing.
  */
-class d51PearPkg2 extends Task
+class d51PearPkg2Task extends Task
 {
+    protected $taskName = 'd51pearpkg2';
+    
     private $_name = null;
     private $_summary = null;
     private $_description = null;

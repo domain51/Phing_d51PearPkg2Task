@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!-- 
+    This contains the build script for the various PEAR packages contained in this repo.
+-->
+<project name="Domain51_PEAR" basedir="." default="build">
+    <includepath classpath="${project.basedir}/src" />
+    <taskdef classname="phing.tasks.ext.d51PearPkg2" name="d51pearpkg2" />
+    
+    <target name="build">
+        <d51pearpkg2 dir="./src"
+                     baseinstalldir="/"
+        >
+            <name>Phing_d51pearkpkg2</name>
+            <summary>An alternative to phing's default pearpkg2</summary>
+            <channel>pear.domain51.com</channel>
+            <description>
+                This package provides an alternative to phing's bundled pearpkg2,
+                allowing for a build script that more closely resembles a real
+                package.xml2.0 file or using the API that is available by using
+                PEAR_PackageFileManager2.
+            </description>
+            
+            <lead user="tswicegood" name="Travis Swicegood" email="developer@domain51.com" />
+            <license>LGPL</license>
+            
+            <version release="0.1" api="0.1" />
+            <stability release="alpha" api="alpha" />
+            <notes>
+                This package allows creating package.xml2.0 files in a less abstract way 
+                by mimicing the actual package.xml2.0 spec or the API for PEAR_PackageFileManager2
+                where it is more concise.
+            </notes>
+            
+        </d51pearpkg2>
+    </target>
+
+</project>

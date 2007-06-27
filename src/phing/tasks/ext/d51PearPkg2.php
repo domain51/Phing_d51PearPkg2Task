@@ -1,8 +1,21 @@
 <?php
 /**
  * This file contains {@link d51PearPkg2}
+ * 
+ * 
+ * @license http://www.gnu.org/licenses/lgpl.html LGPL
+ * 
+ * @package phing.tasks.ext
+ * 
+ * @subpackage Domain51 Extensions
+ * 
  */
 
+/**##@+
+ * Load require class
+ *
+ * @ignore
+ */
 require_once 'PEAR/PackageFileManager2.php';
 require_once 'phing/tasks/ext/d51PearPkg2/Exception.php';
 require_once 'phing/tasks/ext/d51PearPkg2/KeyedContainer.php';
@@ -11,7 +24,11 @@ require_once 'phing/tasks/ext/d51PearPkg2/Maintainer.php';
 require_once 'phing/tasks/ext/d51PearPkg2/Stability.php';
 require_once 'phing/tasks/ext/d51PearPkg2/TextContainer.php';
 require_once 'phing/tasks/ext/d51PearPkg2/Version.php';
+/**##@-*/
 
+/**
+ * This class provides the d51pearpkg2 task for phing.
+ */
 class d51PearPkg2 extends Task
 {
     private $_name = null;

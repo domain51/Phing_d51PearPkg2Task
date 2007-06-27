@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains {@link d51PearPkg2_Exception}
+ * This file contains {@link d51PearPkg2Task_Exception}
  * 
  * 
  * @license http://www.gnu.org/licenses/lgpl.html LGPL
@@ -15,7 +15,7 @@
  * This is thrown whenever an error of some sort is encountered within
  * {@link d51PearPkg2}.
  */
-class d51PearPkg2_Exception extends Exception
+class d51PearPkg2Task_Exception extends Exception
 {
     
 }

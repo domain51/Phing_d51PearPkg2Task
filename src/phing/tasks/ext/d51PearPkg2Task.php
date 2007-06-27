@@ -17,13 +17,13 @@
  * @ignore
  */
 require_once 'PEAR/PackageFileManager2.php';
-require_once 'phing/tasks/ext/d51PearPkg2/Exception.php';
-require_once 'phing/tasks/ext/d51PearPkg2/KeyedContainer.php';
-require_once 'phing/tasks/ext/d51PearPkg2/License.php';
-require_once 'phing/tasks/ext/d51PearPkg2/Maintainer.php';
-require_once 'phing/tasks/ext/d51PearPkg2/Stability.php';
-require_once 'phing/tasks/ext/d51PearPkg2/TextContainer.php';
-require_once 'phing/tasks/ext/d51PearPkg2/Version.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/Exception.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/KeyedContainer.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/License.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/Maintainer.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/Stability.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/TextContainer.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/Version.php';
 /**##@-*/
 
 /**
@@ -115,7 +115,7 @@ class d51PearPkg2Task extends Task
         $package->generateContents();
         $e = $package->writePackageFile();
         if (PEAR::isError($e)) {
-            throw new d51PearPkg2_Exception(
+            throw new d51PearPkg2Task_Exception(
                 'unable to write package.xml file: ' . $e->getMessage()
             );
         }
@@ -163,7 +163,7 @@ class d51PearPkg2Task extends Task
     {
         $accepted_values = array('file', 'cvs');
         if (!in_array($file_list_generator, $accepted_values)) {
-            throw new d51PearPkg2_Exception(
+            throw new d51PearPkg2Task_Exception(
                 'unknown file list generator supplied: ' . $file_list_generator
             );
         }
@@ -178,11 +178,11 @@ class d51PearPkg2Task extends Task
      * {@link PEAR_PackageFileManager2::setOptions}.
      *
      *
-     * @return d51PearPkg2_KeyedContainer
+     * @return d51PearPkg2Task_KeyedContainer
      */
     public function createInstallExceptions()
     {
-        $exception = new d51PearPkg2_KeyedContainer();
+        $exception = new d51PearPkg2Task_KeyedContainer();
         $this->_options['installexceptions'][] = $exception;
         return $exception;
     }
@@ -194,11 +194,11 @@ class d51PearPkg2Task extends Task
      * {@link PEAR_PackageFileManager2::setOptions}.
      *
      *
-     * @return d51PearPkg2_KeyedContainer
+     * @return d51PearPkg2Task_KeyedContainer
      */
     public function createDirRoles()
     {
-        $dir_role = new d51PearPkg2_KeyedContainer();
+        $dir_role = new d51PearPkg2Task_KeyedContainer();
         $this->_options['dir_roles'][] = $dir_roles;
         return $dir_role;
     }
@@ -210,11 +210,11 @@ class d51PearPkg2Task extends Task
      * {@link PEAR_PackageFileManager2::setOptions}.
      *
      *
-     * @return d51PearPkg2_TextContainer
+     * @return d51PearPkg2Task_TextContainer
      */
     public function createIgnore()
     {
-        $ignore = new d51PearPkg2_TextContainer();
+        $ignore = new d51PearPkg2Task_TextContainer();
         $this->_options['ignore'][] = $ignore;
         return $ignore;
     }
@@ -226,12 +226,12 @@ class d51PearPkg2Task extends Task
      * Note that only one <name> element can be present
      *
      *
-     * @return d51PearPkg2_TextContainer
+     * @return d51PearPkg2Task_TextContainer
      */
     public function createName()
     {
         $this->_insureOnlyOnePresent('name');
-        $this->_name = new d51PearPkg2_TextContainer();
+        $this->_name = new d51PearPkg2Task_TextContainer();
         return $this->_name;
     }
     
@@ -241,12 +241,12 @@ class d51PearPkg2Task extends Task
      * Note that only one <summary> element can be present
      *
      *
-     * @return d51PearPkg2_TextContainer
+     * @return d51PearPkg2Task_TextContainer
      */
     public function createSummary()
     {
         $this->_insureOnlyOnePresent('summary');
-        $this->_summary = new d51PearPkg2_TextContainer();
+        $this->_summary = new d51PearPkg2Task_TextContainer();
         return $this->_summary;
     }
     
@@ -256,12 +256,12 @@ class d51PearPkg2Task extends Task
      * Note that only one description element can be present
      *
      *
-     * @return d51PearPkg2_TextContainer
+     * @return d51PearPkg2Task_TextContainer
      */
     public function createDescription()
     {
         $this->_insureOnlyOnePresent('description');
-        $this->_description = new d51PearPkg2_TextContainer();
+        $this->_description = new d51PearPkg2Task_TextContainer();
         return $this->_description;
     }
     
@@ -271,27 +271,27 @@ class d51PearPkg2Task extends Task
      * Note that only one description element can be present
      *
      * 
-     * @return d51PearPkg2_TextContainer
+     * @return d51PearPkg2Task_TextContainer
      */
     public function createChannel()
     {
         $this->_insureOnlyOnePresent('channel');
-        $this->_channel= new d51PearPkg2_TextContainer();
+        $this->_channel= new d51PearPkg2Task_TextContainer();
         return $this->_channel;
     }
     
     /**
      * Handle &lt;lead&gt; elements
      *
-     * Note that the returned {@link d51PearPkg2_Maintainer} object will already have a role of
+     * Note that the returned {@link d51PearPkg2Task_Maintainer} object will already have a role of
      * lead when this method is invoked
      *
      *
-     * @return d51PearPkg2_Maintainer
+     * @return d51PearPkg2Task_Maintainer
      */
     public function createLead()
     {
-        $lead = new d51PearPkg2_Maintainer();
+        $lead = new d51PearPkg2Task_Maintainer();
         $lead->setRole('lead');
         $this->_maintainers[] = $lead;
         return $lead;
@@ -300,15 +300,15 @@ class d51PearPkg2Task extends Task
     /**
      * Handle &lt;developer&gt; elements
      *
-     * Note that the returned {@link d51PearPkg2_Maintainer} object will already have a role of
+     * Note that the returned {@link d51PearPkg2Task_Maintainer} object will already have a role of
      * developer when this method is invoked
      *
      *
-     * @return d51PearPkg2_Maintainer
+     * @return d51PearPkg2Task_Maintainer
      */
     public function createDeveloper()
     {
-        $developer = new d51PearPkg2_Maintainer();
+        $developer = new d51PearPkg2Task_Maintainer();
         $developer->setRole('developer');
         $this->_maintainers[] = $developer;
         return $developer;
@@ -317,15 +317,15 @@ class d51PearPkg2Task extends Task
     /**
      * Handle &lt;contributor&gt; elements
      *
-     * Note that the returned {@link d51PearPkg2_Maintainer} object will already have a role of
+     * Note that the returned {@link d51PearPkg2Task_Maintainer} object will already have a role of
      * contributor when this method is invoked
      *
      *
-     * @return d51PearPkg2_Maintainer
+     * @return d51PearPkg2Task_Maintainer
      */
     public function createContributor()
     {
-        $contributor = new d51PearPkg2_Maintainer();
+        $contributor = new d51PearPkg2Task_Maintainer();
         $contributor->setRole('contributor');
         $this->_maintainers[] = $contributor;
         return $contributor;
@@ -334,15 +334,15 @@ class d51PearPkg2Task extends Task
     /**
      * Handle &lt;helper&gt; elements
      *
-     * Note that the returned {@link d51PearPkg2_Maintainer} object will already have a role of
+     * Note that the returned {@link d51PearPkg2Task_Maintainer} object will already have a role of
      * helper when this method is invoked
      *
      *
-     * @return d51PearPkg2_Maintainer
+     * @return d51PearPkg2Task_Maintainer
      */
     public function createHelper()
     {
-        $helper = new d51PearPkg2_Maintainer();
+        $helper = new d51PearPkg2Task_Maintainer();
         $helper->setRole('helper');
         $this->_maintainers[] = $helper;
         return $helper;
@@ -355,11 +355,11 @@ class d51PearPkg2Task extends Task
      * in future verions
      * 
      *
-     * @return d51PearPkg2_TextContainer
+     * @return d51PearPkg2Task_TextContainer
      */
     public function createDate()
     {
-        $this->_date = new d51PearPkg2_TextContainer();
+        $this->_date = new d51PearPkg2Task_TextContainer();
         return $this->_date;
     }
     
@@ -370,11 +370,11 @@ class d51PearPkg2Task extends Task
      * in future versions
      *
      *
-     * @return d51PearPkg2_License
+     * @return d51PearPkg2Task_License
      */
     public function createLicense()
     {
-        $this->_license = new d51PearPkg2_License();
+        $this->_license = new d51PearPkg2Task_License();
         return $this->_license;
     }
     
@@ -385,11 +385,11 @@ class d51PearPkg2Task extends Task
      * in future versions
      *
      *
-     * @return d51PearPkg2_Version
+     * @return d51PearPkg2Task_Version
      */
     public function createVersion()
     {
-        $this->_version = new d51PearPkg2_Version();
+        $this->_version = new d51PearPkg2Task_Version();
         return $this->_version;
     }
     
@@ -400,11 +400,11 @@ class d51PearPkg2Task extends Task
      * in future versions
      * 
      * 
-     * @return d51PearPkg2_Stability
+     * @return d51PearPkg2Task_Stability
      */
     public function createStability()
     {
-        $this->_stability = new d51PearPkg2_Stability();
+        $this->_stability = new d51PearPkg2Task_Stability();
         return $this->_stability;
     }
     
@@ -415,11 +415,11 @@ class d51PearPkg2Task extends Task
      * in future versions
      *
      * 
-     * @return d51PearPkg2_TextContainer
+     * @return d51PearPkg2Task_TextContainer
      */
     public function createNotes()
     {
-        $this->_notes = new d51PearPkg2_TextContainer();
+        $this->_notes = new d51PearPkg2Task_TextContainer();
         return $this->_notes;
     }
     
@@ -463,7 +463,7 @@ class d51PearPkg2Task extends Task
             return;
         }
         
-        throw new d51PearPkg2_Exception(
+        throw new d51PearPkg2Task_Exception(
             "<{$key}> can only be called once"
         );
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains {@link d51PearPkg2_TextContainer}
+ * This file contains {@link d51PearPkg2Task_TextContainer}
  * 
  * 
  * @license http://www.gnu.org/licenses/lgpl.html LGPL
@@ -16,7 +16,7 @@
  *
  * @see d51PearPkg2
  */
-class d51PearPkg2_TextContainer
+class d51PearPkg2Task_TextContainer
 {
     private $_value = '';
     

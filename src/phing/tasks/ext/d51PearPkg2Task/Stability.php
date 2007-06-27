@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains {@link d51PearPkg2_Stability}
+ * This file contains {@link d51PearPkg2Task_Stability}
  * 
  * 
  * @license http://www.gnu.org/licenses/lgpl.html LGPL
@@ -16,7 +16,7 @@
  *
  * @see d51PearPkg2
  */
-class d51PearPkg2_Stability
+class d51PearPkg2Task_Stability
 {
     private $_release = null;
     private $_api = null;

@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains {@link d51PearPkg2_Maintainer}
+ * This file contains {@link d51PearPkg2Task_Maintainer}
  * 
  * 
  * @license http://www.gnu.org/licenses/lgpl.html LGPL
@@ -17,7 +17,7 @@
  * @see d51PearPkg2, d51PearPkg2::createLead(), d51PearPkg2::createDeveloper(),
  *      d51PearPkg2::createHelper(), d51PearPkg2::createContributor()
  */
-class d51PearPkg2_Maintainer 
+class d51PearPkg2Task_Maintainer 
 {
     private $_name = null;
     private $_user = null;

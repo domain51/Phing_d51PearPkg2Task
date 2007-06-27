@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains {@link d51PearPkg2_License}
+ * This file contains {@link d51PearPkg2Task_License}
  * 
  * 
  * @license http://www.gnu.org/licenses/lgpl.html LGPL
@@ -16,7 +16,7 @@
  *
  * @see d51PearPkg2, d51PearPkg2::createLicense()
  */
-class d51PearPkg2_License
+class d51PearPkg2Task_License
 {
     private $_uri = null;
     private $_license = null;

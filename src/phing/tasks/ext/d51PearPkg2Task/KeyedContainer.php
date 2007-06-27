@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains {@link d51PearPkg2_KeyedContainer}
+ * This file contains {@link d51PearPkg2Task_KeyedContainer}
  * 
  * 
  * @license http://www.gnu.org/licenses/lgpl.html LGPL
@@ -16,7 +16,7 @@
  *
  * @see d51PearPkg2, d51PearPkg2::createInstallExceptions(), d51PearPkg2::createDirRoles(),
  */
-class d51PearPkg2_KeyedContainer
+class d51PearPkg2Task_KeyedContainer
 {
     private $_key = '';
     private $_value = '';

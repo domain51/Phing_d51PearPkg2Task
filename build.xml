@@ -6,7 +6,7 @@
     <includepath classpath="${project.basedir}/src" />
     <taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
     
-    <property name="version" value="0.1" />
+    <property name="version" value="0.2" />
     
     <target name="export">
         <echo msg="Exporting SVN files" />
@@ -32,11 +32,26 @@
             
             <version release="${version}" api="0.1" />
             <stability release="alpha" api="alpha" />
-            <notes>
-                This package allows creating package.xml2.0 files in a less abstract way 
-                by mimicing the actual package.xml2.0 spec or the API for PEAR_PackageFileManager2
-                where it is more concise.
-            </notes>
+            
+            <changelog version="0.2" date="2007-07-06" license="LGPL">
+                Release 0.2 adds in the following undocumented
+                features:
+                * &lt;dependencies> element for handling basic
+                  dependencies (see Domain51_Cache for usage
+                  examples)
+                * &lt;changelog> element for handling changelog
+                  entries
+                * &lt;notes> element now not required if a
+                  &lt;changelog> element with the same version
+                  is present.
+                * &lt;notes> only strip off preceding soft and
+                  hard tabs.  Soft-tabs are assumed to be 4
+                  spaces.
+            </changelog>
+            
+            <changelog version="0.1" date="2007-06-27" license="LGPL">
+                Initial release of package  
+            </changelog>
         </d51pearpkg2>
     </target>
     
@@ -49,6 +64,7 @@
             </fileset>
         </copy>
         <delete dir="./build/phing" />
+        <delete file="Phing_d51PearPkg2Task-${version}.tgz" />
         <tar compression="gzip" destfile="Phing_d51PearPkg2Task-${version}.tgz" basedir="./build" />
     </target>
     

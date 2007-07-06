@@ -17,6 +17,7 @@
  * @ignore
  */
 require_once 'PEAR/PackageFileManager2.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/Dependencies.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Exception.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/KeyedContainer.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/License.php';
@@ -44,6 +45,7 @@ class d51PearPkg2Task extends Task
     private $_stability = null;
     private $_release = null;
     private $_notes = null;
+    private $_dependencies = null;
     
     private $_directory = null;
     private $_options = array(
@@ -109,6 +111,59 @@ class d51PearPkg2Task extends Task
                 $maintainer->email,
                 $maintainer->active
             );
+        }
+        
+        // handle dependencies
+        if (!empty($this->_dependencies)) {
+            $this->log('adding dependencies');
+            if (count($this->_dependencies->groups) > 0) {
+                $this->log('found dependency groups');
+                foreach ($this->_dependencies->groups as $group) {
+                    $this->log("adding [{$group->name}] :: [{$group->hint}]");
+                    $package->addDependencyGroup($group->name, $group->hint);
+                    foreach ($group->packages as $sub_package) {
+                        $package->addGroupPackageDepWithChannel(
+                            'subpackage',
+                            $group->name,
+                            $sub_package->name,
+                            $sub_package->channel,
+                            '0.0.1'
+                        );
+                    }
+                }
+            }
+            if (count($this->_dependencies->packages) > 0) {
+                $this->log('found dependencies');
+                foreach ($this->_dependencies->packages as $dependency) {
+                    $this->log("adding following dependency: {$dependency->channel}/{$dependency->name}");
+                    $package->addPackageDepWithChannel(
+                        $dependency->type,
+                        $dependency->name,
+                        $dependency->channel,
+                        $dependency->minimum_version,
+                        $dependency->maximum_version,
+                        $dependency->recommended_version,
+                        $dependency->exclude_version,
+                        $dependency->providesextension,
+                        $dependency->nodefault
+                    );
+                }
+            }
+            
+            if (count($this->_dependencies->extensions) > 0) {
+                $this->log('adding extension dependencies');
+                foreach ($this->_dependencies->extensions as $extension) {
+                    $this->log("adding ext dependency for: {$extension->name}");
+                    $package->addExtensionDep(
+                        $extension->type,
+                        $extension->name,
+                        $extension->minimum_version,
+                        $extension->maximum_version,
+                        $extension->recommended_version,
+                        $extension->extension
+                    );
+                }
+            }
         }
         
         $package->setLicense($this->_license->license, $this->_license->uri);
@@ -421,6 +476,16 @@ class d51PearPkg2Task extends Task
     {
         $this->_notes = new d51PearPkg2Task_TextContainer();
         return $this->_notes;
+    }
+    
+    /**
+     * Handle &lt;dependencies> element
+     *
+     */
+    public function createDependencies()
+    {
+        $this->_dependencies = new d51PearPkg2Task_Dependencies();
+        return $this->_dependencies;
     }
     
     

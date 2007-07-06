@@ -17,6 +17,7 @@
  * @ignore
  */
 require_once 'PEAR/PackageFileManager2.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/Changelog.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Dependencies.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Exception.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/KeyedContainer.php';
@@ -46,6 +47,7 @@ class d51PearPkg2Task extends Task
     private $_release = null;
     private $_notes = null;
     private $_dependencies = null;
+    private $_changelogs = array();
     
     private $_directory = null;
     private $_options = array(
@@ -92,11 +94,6 @@ class d51PearPkg2Task extends Task
         $package->setAPIStability($this->_stability->api);
         $package->setReleaseStability($this->_stability->release);
         
-        $notes = str_replace("\n", '\n', (string)$this->_notes);
-        $notes = preg_replace('/\s{2,}/', '', $notes);
-        $notes = str_replace('\n', ' ', $notes);
-        
-        $package->setNotes($notes);
         // TODO: allow different types
         $package->setPackageType('php');
         $package->addRelease();
@@ -165,6 +162,24 @@ class d51PearPkg2Task extends Task
                 }
             }
         }
+        
+        foreach ($this->_changelogs as $changelog) {
+            $this->log("adding changelog for prior release [{$changelog->version}]");
+            $changelog->package = $package;
+            $package->setChangelogEntry(
+                $changelog->version,
+                $changelog->toArray()
+            );
+            
+            if (is_null($this->_notes) && $package->getVersion() == $changelog->version) {
+                $this->log("no package notes specified, using changelog entry");
+                $this->_notes = $changelog->contents;
+            }
+        }
+        
+        $notes = preg_replace("/^( {4}|\t)+/m", '', (string)$this->_notes);
+        $package->setNotes($notes);
+
         
         $package->setLicense($this->_license->license, $this->_license->uri);
         $package->generateContents();
@@ -486,6 +501,13 @@ class d51PearPkg2Task extends Task
     {
         $this->_dependencies = new d51PearPkg2Task_Dependencies();
         return $this->_dependencies;
+    }
+    
+    public function createChangelog()
+    {
+        $changelog = new d51PearPkg2Task_Changelog();
+        $this->_changelogs[] = $changelog;
+        return $changelog;
     }
     
     

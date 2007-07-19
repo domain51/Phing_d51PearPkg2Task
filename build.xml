@@ -6,7 +6,7 @@
     <includepath classpath="${project.basedir}/src" />
     <taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
     
-    <property name="version" value="0.2" />
+    <property name="version" value="0.2.1" />
     
     <target name="export">
         <echo msg="Exporting SVN files" />
@@ -32,6 +32,11 @@
             
             <version release="${version}" api="0.1" />
             <stability release="alpha" api="alpha" />
+            
+            <changelog version="0.2.1" date="2007-07-19" license="LGPL">
+                Fixes type in dir_roles generation that kept
+                them from properly being added.
+            </changelog>
             
             <changelog version="0.2" date="2007-07-06" license="LGPL">
                 Release 0.2 adds in the following undocumented

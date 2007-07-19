@@ -269,7 +269,7 @@ class d51PearPkg2Task extends Task
     public function createDirRoles()
     {
         $dir_role = new d51PearPkg2Task_KeyedContainer();
-        $this->_options['dir_roles'][] = $dir_roles;
+        $this->_options['dir_roles'][] = $dir_role;
         return $dir_role;
     }
     

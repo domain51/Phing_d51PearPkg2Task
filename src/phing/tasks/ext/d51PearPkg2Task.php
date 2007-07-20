@@ -19,6 +19,7 @@
 require_once 'PEAR/PackageFileManager2.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Changelog.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Dependencies.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/Description.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Exception.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/KeyedContainer.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/License.php';
@@ -82,10 +83,7 @@ class d51PearPkg2Task extends Task
         $package->setPackage((string)$this->_name);
         $package->setSummary((string)$this->_summary);
         
-        // TODO: make these less hacky - this is what I come up with at 9:30 at night
-        $desc = str_replace("\n", '\n', (string)$this->_description);
-        $desc = preg_replace('/\s{2,}/', '', $desc);
-        $desc = str_replace('\n', ' ', $desc);
+        $desc = preg_replace("/^({$this->_description->indention_type}{{$this->_description->indentions_to_remove}}|\t)+/m", '', (string)$this->_description);
         $package->setDescription($desc);
         
         $package->setChannel((string)$this->_channel);
@@ -331,7 +329,7 @@ class d51PearPkg2Task extends Task
     public function createDescription()
     {
         $this->_insureOnlyOnePresent('description');
-        $this->_description = new d51PearPkg2Task_TextContainer();
+        $this->_description = new d51PearPkg2Task_Description();
         return $this->_description;
     }
     

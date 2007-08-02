@@ -6,7 +6,7 @@
     <includepath classpath="${project.basedir}/src" />
     <taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
     
-    <property name="version" value="0.2.2" />
+    <property name="version" value="0.3" />
     
     <target name="export">
         <echo msg="Exporting SVN files" />
@@ -32,6 +32,13 @@
             
             <version release="${version}" api="0.1" />
             <stability release="alpha" api="alpha" />
+            
+            <changelog version="0.3" date="2007-08-04" license="LGPL">
+                <!--        Don't exceed this width         -->
+                Adds new Release and Replacement objects.  Both
+                still need tweaking, but basic functionality is
+                there.
+            </changelog>
             
             <changelog version="0.2.2" date="2007-07-19" license="LGPL">
                 <!--        Don't exceed this width         -->

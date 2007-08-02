@@ -49,6 +49,7 @@ class d51PearPkg2Task extends Task
     private $_notes = null;
     private $_dependencies = null;
     private $_changelogs = array();
+    private $_replacements = array();
     
     private $_directory = null;
     private $_options = array(
@@ -172,6 +173,26 @@ class d51PearPkg2Task extends Task
             if (is_null($this->_notes) && $package->getVersion() == $changelog->version) {
                 $this->log("no package notes specified, using changelog entry");
                 $this->_notes = $changelog->contents;
+            }
+        }
+        
+        foreach ($this->_replacements as $replacement) {
+            $replacement->isValid();
+            
+            $package->addReplacement(
+                $replacement->path,
+                $replacement->type,
+                $replacement->from,
+                $replacement->to
+            );
+        }
+        
+        foreach ($this->_releases as $release) {
+            $this->log('adding new release');
+            $package->addRelease();
+            foreach ($release->install as $install) {
+                $this->log("installing [{$install->name}] as [{$install->as}]");
+                $package->addInstallAs($install->name, $install->as);
             }
         }
         
@@ -506,6 +527,22 @@ class d51PearPkg2Task extends Task
         $changelog = new d51PearPkg2Task_Changelog();
         $this->_changelogs[] = $changelog;
         return $changelog;
+    }
+    
+    public function createReplacement()
+    {
+        require_once 'd51PearPkg2Task/Replacement.php';
+        $replacement = new d51PearPkg2Task_Replacement();
+        $this->_replacements[] = $replacement;
+        return $replacement;
+    }
+    
+    public function createRelease()
+    {
+        require_once 'd51PearPkg2Task/Release.php';
+        $release = new d51PearPkg2Task_Release();
+        $this->_releases[] = $release;
+        return $release;
     }
     
     

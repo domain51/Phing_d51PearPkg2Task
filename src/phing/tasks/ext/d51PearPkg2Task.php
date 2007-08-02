@@ -50,6 +50,7 @@ class d51PearPkg2Task extends Task
     private $_dependencies = null;
     private $_changelogs = array();
     private $_replacements = array();
+    private $_releases = array();
     
     private $_directory = null;
     private $_options = array(

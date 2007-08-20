@@ -111,7 +111,9 @@ class d51PearPkg2Task extends Task
                 $this->_dependencies->pear->exclude_version
             );
         } else {
-            $package->setPearinstallerDep('1.6.0');
+            $package->setPearinstallerDep(
+                PEAR_Config::singleton()->getRegistry()->packageInfo('PEAR', 'version')
+            );
         }
         
         foreach ($this->_maintainers as $maintainer) {

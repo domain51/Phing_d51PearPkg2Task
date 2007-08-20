@@ -35,8 +35,8 @@ class d51PearPkg2Task_Dependencies_PHP
         $this->_maximum_version = $maximum_version;
     }
     
-    public function setExclude_version($exclude_version)
+    public function setExclude_versions($exclude_version)
     {
-        $this->_exclude_version = $exclude_version;
+        $this->_exclude_version = explode(',', $exclude_version);
     }
 }

@@ -70,9 +70,9 @@ class d51PearPkg2Task_Dependencies_Package
         $this->_recommended_version = $recommended_version;
     }
     
-    public function setExclude_version($exclude_version)
+    public function setExclude_versions($exclude_version)
     {
-        $this->_exclude_version = $exclude_version;
+        $this->_exclude_version = explode(',', $exclude_version);
     }
     
     public function setProvidesextension($providesextension)

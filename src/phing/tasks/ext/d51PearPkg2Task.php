@@ -98,8 +98,6 @@ class d51PearPkg2Task extends Task
         $package->setPackageType('php');
         $package->addRelease();
         if ($this->_dependencies->php !== false) {
-            var_dump($this->_dependencies->php);
-            var_dump($this->_dependencies->php->minimum_version);
             $package->setPhpDep($this->_dependencies->php->minimum_version);
         } else {
             $package->setPhpDep(phpversion());

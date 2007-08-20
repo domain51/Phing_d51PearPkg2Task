@@ -102,7 +102,17 @@ class d51PearPkg2Task extends Task
         } else {
             $package->setPhpDep(phpversion());
         }
-        $package->setPearinstallerDep('1.6.0');
+        
+        if ($this->_dependencies->pear !== false) {
+            $package->setPearinstallerDep(
+                $this->_dependencies->pear->minimum_version,
+                $this->_dependencies->pear->maximum_version,
+                $this->_dependencies->pear->recommended_version,
+                $this->_dependencies->pear->exclude_version
+            );
+        } else {
+            $package->setPearinstallerDep('1.6.0');
+        }
         
         foreach ($this->_maintainers as $maintainer) {
             $package->addMaintainer(

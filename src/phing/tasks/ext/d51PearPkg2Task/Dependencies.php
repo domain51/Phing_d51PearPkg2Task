@@ -4,6 +4,7 @@ require_once 'phing/tasks/ext/d51PearPkg2Task/Dependencies/Extension.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Dependencies/Group.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Dependencies/Package.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Dependencies/PHP.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/Dependencies/PEAR.php';
 
 class d51PearPkg2Task_Dependencies
 {
@@ -11,6 +12,7 @@ class d51PearPkg2Task_Dependencies
     private $_packages = array();
     private $_extensions = array();
     private $_php = false;
+    private $_pear = false;
     
     public function __construct()
     {
@@ -28,6 +30,8 @@ class d51PearPkg2Task_Dependencies
                 return $this->_extensions;
             case 'php' :
                 return $this->_php;
+            case 'pear' :
+                return $this->_pear;
         }
     }
     
@@ -44,6 +48,14 @@ class d51PearPkg2Task_Dependencies
         $this->_php = $php;
         return $php;
     }
+    
+    public function createPEAR()
+    {
+        $pear = new d51PearPkg2Task_Dependencies_PEAR();
+        $this->_pear = $pear;
+        return $pear;
+    }
+        
     
     public function createExtension()
     {

@@ -97,7 +97,13 @@ class d51PearPkg2Task extends Task
         // TODO: allow different types
         $package->setPackageType('php');
         $package->addRelease();
-        $package->setPhpDep('5.2.3');
+        if ($this->_dependencies->php !== false) {
+            var_dump($this->_dependencies->php);
+            var_dump($this->_dependencies->php->minimum_version);
+            $package->setPhpDep($this->_dependencies->php->minimum_version);
+        } else {
+            $package->setPhpDep(phpversion());
+        }
         $package->setPearinstallerDep('1.6.0');
         
         foreach ($this->_maintainers as $maintainer) {

@@ -21,10 +21,12 @@
             <summary>An alternative to phing's default pearpkg2</summary>
             <channel>pear.domain51.com</channel>
             <description>
-                This package provides an alternative to phing's bundled pearpkg2,
-                allowing for a build script that more closely resembles a real
-                package.xml2.0 file or using the API that is available by using
-                PEAR_PackageFileManager2.
+            	<!--        Don't exceed this width         -->
+                This package provides an alternative to phing's
+            	bundled pearpkg2, allowing for a build script 
+            	that more closely resembles a real 
+            	package.xml2.0 file or using the API that is 
+            	available by using PEAR_PackageFileManager2.
             </description>
             
             <lead user="tswicegood" name="Travis Swicegood" email="developer@domain51.com" />

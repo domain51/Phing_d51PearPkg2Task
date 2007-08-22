@@ -6,7 +6,7 @@
     <includepath classpath="${project.basedir}/src" />
     <taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
     
-    <property name="version" value="0.4" />
+    <property name="version" value="0.5" />
     
     <target name="export">
         <echo msg="Exporting SVN files" />
@@ -36,11 +36,32 @@
             <stability release="alpha" api="alpha" />
             
             <dependencies>
+                <php minimum_version="5.2.0" />
+                
+                <pear minimum_version="1.6.0"
+                      recommended_version="1.6.1" />
+                
                 <package name="PEAR_PackageFileManager"
                          channel="pear.php.net"
                          recommended_version="1.6.1"
                          minimum_version="1.6.0" />
             </dependencies>
+            
+            <changelog version="0.5" date="2007-08-22" license="LGPL">
+                <!--        Don't exceed this width         -->
+                The following changes were made:
+                
+                * Add in ability to set PHP and PEAR version
+                dependencies.
+                * Make PHP minimum version default to the
+                current PHP version.
+                * Make PEAR minimum version default to the
+                current PEAR version
+                * Rename "exclude_version" to
+                "exclude_versions" and make it comma separated
+                so you can specify multiple versions to exclude.
+                
+            </changelog>
             
             <changelog version="0.4" date="2007-08-09" license="LGPL">
                 <!--        Don't exceed this width         -->

@@ -539,6 +539,13 @@ class d51PearPkg2Task extends Task
         return $this->_dependencies;
     }
     
+    
+    /**
+     * Handle &lt;changelog> elements
+     *
+     *
+     * @return d51PearPkg2Task_Changelog
+     */
     public function createChangelog()
     {
         $changelog = new d51PearPkg2Task_Changelog();
@@ -546,6 +553,13 @@ class d51PearPkg2Task extends Task
         return $changelog;
     }
     
+    
+    /**
+     * Handle &lt;replacement> elements
+     *
+     *
+     * @return d51PearPkg2Task_Replacement
+     */
     public function createReplacement()
     {
         require_once 'd51PearPkg2Task/Replacement.php';
@@ -554,6 +568,13 @@ class d51PearPkg2Task extends Task
         return $replacement;
     }
     
+    
+    /**
+     * Handle &lt;release> elements
+     *
+     *
+     * @return d51PearPkg2Task_Release
+     */
     public function createRelease()
     {
         require_once 'd51PearPkg2Task/Release.php';

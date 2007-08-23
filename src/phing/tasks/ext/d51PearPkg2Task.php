@@ -278,7 +278,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;installexceptions&gt; elements
+     * Handle <installexceptions> elements
      * 
      * This corresponds to the ignore options present in
      * {@link PEAR_PackageFileManager2::setOptions}.
@@ -294,7 +294,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;dirrole&gt; elements
+     * Handle <dirrole> elements
      * 
      * This corresponds to the ignore options present in
      * {@link PEAR_PackageFileManager2::setOptions}.
@@ -310,7 +310,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;ignore&gt; elements
+     * Handle <ignore> elements
      *
      * This corresponds to the ignore options present in
      * {@link PEAR_PackageFileManager2::setOptions}.
@@ -357,7 +357,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle the &lt;description&gt; element
+     * Handle the <description> element
      *
      * Note that only one description element can be present
      *
@@ -372,7 +372,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;channel&gt; element
+     * Handle <channel> element
      *
      * Note that only one description element can be present
      *
@@ -387,7 +387,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;lead&gt; elements
+     * Handle <lead> elements
      *
      * Note that the returned {@link d51PearPkg2Task_Maintainer} object will already have a role of
      * lead when this method is invoked
@@ -404,7 +404,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;developer&gt; elements
+     * Handle <developer> elements
      *
      * Note that the returned {@link d51PearPkg2Task_Maintainer} object will already have a role of
      * developer when this method is invoked
@@ -421,7 +421,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;contributor&gt; elements
+     * Handle <contributor> elements
      *
      * Note that the returned {@link d51PearPkg2Task_Maintainer} object will already have a role of
      * contributor when this method is invoked
@@ -438,7 +438,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;helper&gt; elements
+     * Handle <helper> elements
      *
      * Note that the returned {@link d51PearPkg2Task_Maintainer} object will already have a role of
      * helper when this method is invoked
@@ -455,7 +455,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;date&gt; element
+     * Handle <date> element
      *
      * Note that currently only one date object is maintained per package, this may change
      * in future verions
@@ -470,7 +470,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;license&gt; element
+     * Handle <license> element
      *
      * Note that currently only one license object is maintained per package, this may change
      * in future versions
@@ -485,7 +485,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;version&gt; element
+     * Handle <version> element
      *
      * Note that currently only one version object is maintained per package, this may change
      * in future versions
@@ -500,7 +500,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;stability&gt; element
+     * Handle <stability> element
      * 
      * Note that currently only one stability object is maintained per package, this may change
      * in future versions
@@ -515,7 +515,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;notes&gt; element
+     * Handle <notes> element
      * 
      * Note that currently only one notes object is maintained per package, this may change
      * in future versions
@@ -530,7 +530,7 @@ class d51PearPkg2Task extends Task
     }
     
     /**
-     * Handle &lt;dependencies> element
+     * Handle <dependencies> element
      *
      */
     public function createDependencies()
@@ -541,7 +541,7 @@ class d51PearPkg2Task extends Task
     
     
     /**
-     * Handle &lt;changelog> elements
+     * Handle <changelog> elements
      *
      *
      * @return d51PearPkg2Task_Changelog
@@ -555,7 +555,7 @@ class d51PearPkg2Task extends Task
     
     
     /**
-     * Handle &lt;replacement> elements
+     * Handle <replacement> elements
      *
      *
      * @return d51PearPkg2Task_Replacement
@@ -570,7 +570,7 @@ class d51PearPkg2Task extends Task
     
     
     /**
-     * Handle &lt;release> elements
+     * Handle <release> elements
      *
      *
      * @return d51PearPkg2Task_Release

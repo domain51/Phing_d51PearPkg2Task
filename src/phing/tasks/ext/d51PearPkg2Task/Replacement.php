@@ -1,5 +1,19 @@
 <?php
+/**
+ * This file contains {@link d51PearPkg2Task_Replacement} and
+ * {@link d51PearPkg2Task_Replacement_MissingAttributeException}
+ *
+ *
+ * @license http://www.gnu.org/licenses/lgpl.html LGPL
+ * 
+ * @package phing.tasks.ext
+ * 
+ * @subpackage d51pearkpkg2
+ */
 
+/**
+ * Acts as a container for &lt;replacement> elements within &lt;d51pearpkg2>
+ */
 class d51PearPkg2Task_Replacement extends ProjectComponent
 {
     private $_path = null;
@@ -12,26 +26,56 @@ class d51PearPkg2Task_Replacement extends ProjectComponent
         
     }
     
+    /**
+     * Handle path attribute
+     *
+     * @param string $path
+     */
     public function setPath($path)
     {
         $this->_path = $path;
     }
     
+    
+    /**
+     * Handle type attribute
+     *
+     * @param string $type
+     */
     public function setType($type)
     {
         $this->_type = $type;
     }
     
+    
+    /**
+     * Handle from attribute
+     *
+     * @param string $from
+     */
     public function setFrom($from)
     {
         $this->_from = $from;
     }
     
+    
+    /**
+     * Handle to attribute
+     *
+     * @param string $to
+     */
     public function setTo($to)
     {
         $this->_to = $to;
     }
     
+    
+    /**
+     * Returns true if this &lt;replacement> element has been properly
+     * initialized, otherwise false.
+     *
+     * @return bool
+     */
     public function isValid()
     {
         $failed = array();
@@ -51,6 +95,15 @@ class d51PearPkg2Task_Replacement extends ProjectComponent
         }
     }
     
+    
+    /**
+     * Magic method to expose properties as read-only, public properties
+     *
+     *
+     * @param string $key
+     *
+     * @return mixed
+     */
     public function __get($key)
     {
         switch ($key) {
@@ -63,10 +116,19 @@ class d51PearPkg2Task_Replacement extends ProjectComponent
         }
     }
     
+    
+    /**
+     * Log a $message with "[d51pearpkg2-replacement]" prefix
+     *
+     * @param string $message
+     */
     public function log($message)
     {
         parent::log('[d51pearpkg2-replacement] ' . $message);
     }
 }
 
+/**
+ * Exception to throw when an attribute is missing
+ */
 class d51PearPkg2Task_Replacement_MissingAttributeException extends Exception { }

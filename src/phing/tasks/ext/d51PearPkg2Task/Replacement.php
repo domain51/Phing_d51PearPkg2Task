@@ -12,7 +12,7 @@
  */
 
 /**
- * Acts as a container for &lt;replacement> elements within &lt;d51pearpkg2>
+ * Acts as a container for <replacement> elements within <d51pearpkg2>
  */
 class d51PearPkg2Task_Replacement extends ProjectComponent
 {
@@ -71,7 +71,7 @@ class d51PearPkg2Task_Replacement extends ProjectComponent
     
     
     /**
-     * Returns true if this &lt;replacement> element has been properly
+     * Returns true if this <replacement> element has been properly
      * initialized, otherwise false.
      *
      * @return bool

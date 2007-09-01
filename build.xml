@@ -6,7 +6,7 @@
     <includepath classpath="${project.basedir}/src" />
     <taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
     
-    <property name="version" value="0.5" />
+    <property name="version" value="0.6" />
     
     <target name="export">
         <echo msg="Exporting SVN files" />
@@ -46,6 +46,16 @@
                          recommended_version="1.6.1"
                          minimum_version="1.6.0" />
             </dependencies>
+            
+            <changelog version="0.6" date="2007-09-01" license="LGPL">
+                <!--        Don't exceed this width         -->
+            	The following changes were made:
+        		
+            	* allow setting of "type" attribute at main
+        		package.  If not specified, type is php.
+            	* redirects all output from the PEAR package
+            	generator directly to phing logs.
+            </changelog>
             
             <changelog version="0.5" date="2007-08-22" license="LGPL">
                 <!--        Don't exceed this width         -->

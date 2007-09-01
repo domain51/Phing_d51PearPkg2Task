@@ -21,6 +21,7 @@ require_once 'phing/tasks/ext/d51PearPkg2Task/Changelog.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Dependencies.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Description.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Exception.php';
+require_once 'phing/tasks/ext/d51PearPkg2Task/Frontend.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/KeyedContainer.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/License.php';
 require_once 'phing/tasks/ext/d51PearPkg2Task/Maintainer.php';
@@ -38,6 +39,7 @@ class d51PearPkg2Task extends Task
     
     private $_name = null;
     private $_summary = null;
+    private $_type = 'php';
     private $_description = null;
     private $_channel = null;
     private $_maintainers = array();
@@ -78,6 +80,7 @@ class d51PearPkg2Task extends Task
      */
     public function main()
     {
+        PEAR_Frontend::setFrontendObject(new d51PearPkg2Task_Frontend($this));
         $package = new PEAR_PackageFileManager2();
         $this->_initOptions();
         $package->setOptions($this->_options);
@@ -95,7 +98,7 @@ class d51PearPkg2Task extends Task
         $package->setReleaseStability($this->_stability->release);
         
         // TODO: allow different types
-        $package->setPackageType('php');
+        $package->setPackageType($this->_type);
         $package->addRelease();
         if ($this->_dependencies->php !== false) {
             $package->setPhpDep($this->_dependencies->php->minimum_version);
@@ -117,6 +120,7 @@ class d51PearPkg2Task extends Task
         }
         
         foreach ($this->_maintainers as $maintainer) {
+            $this->log("adding maintainer [{$maintainer->user}/{$maintainer->name}] with role [{$maintainer->role}]");
             $package->addMaintainer(
                 $maintainer->role,
                 $maintainer->user,
@@ -196,6 +200,7 @@ class d51PearPkg2Task extends Task
         foreach ($this->_replacements as $replacement) {
             $replacement->isValid();
             
+            $this->log("adding replace from [{$replacement->from}] to [{$replacement->to}]");
             $package->addReplacement(
                 $replacement->path,
                 $replacement->type,
@@ -275,6 +280,21 @@ class d51PearPkg2Task extends Task
         }
         
         $this->_options['filelistgenerator'] = $file_list_generator;
+    }
+    
+    
+    /**
+     * Handles "type" attributes of <d51pearpkg2> task
+     * 
+     * Note: This should be a valid type based on what PEAR packages expect.
+     * No validation occurs at this point, at least until PEAR provides a
+     * means of providing valid values.
+     * 
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->_type = $type;
     }
     
     /**

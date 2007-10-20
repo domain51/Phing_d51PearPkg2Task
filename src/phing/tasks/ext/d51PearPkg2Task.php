@@ -106,7 +106,8 @@ class d51PearPkg2Task extends Task
             $package->setPhpDep(phpversion());
         }
         
-        if ($this->_dependencies->pear !== false) {
+        if (!empty($this->_dependencies->pear)) {
+            $this->log('setting minimum PEAR version: ' . $this->_dependencies->pear->minimum_version);
             $package->setPearinstallerDep(
                 $this->_dependencies->pear->minimum_version,
                 $this->_dependencies->pear->maximum_version,
@@ -114,6 +115,9 @@ class d51PearPkg2Task extends Task
                 $this->_dependencies->pear->exclude_version
             );
         } else {
+            $this->log('setting minimum PEAR version to currently installed version');
+            $pear_version = PEAR_Config::singleton()->getRegistry()->packageInfo('PEAR', 'version');
+            $this->log('minimum PEAR version: ' . $pear_version);
             $package->setPearinstallerDep(
                 PEAR_Config::singleton()->getRegistry()->packageInfo('PEAR', 'version')
             );

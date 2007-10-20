@@ -100,7 +100,7 @@ class d51PearPkg2Task extends Task
         // TODO: allow different types
         $package->setPackageType($this->_type);
         $package->addRelease();
-        if (!empty($this->_dependencies->php)) {
+        if (!is_null($this->_dependencies->php)) {
             $this->log('Using explicit PHP minimum version: ' . $this->_dependencies->php->minimum_version);
             $package->setPhpDep($this->_dependencies->php->minimum_version);
         } else {
@@ -108,7 +108,7 @@ class d51PearPkg2Task extends Task
             $package->setPhpDep(phpversion());
         }
         
-        if (!empty($this->_dependencies->pear)) {
+        if (!is_null($this->_dependencies->pear)) {
             $this->log('setting minimum PEAR version: ' . $this->_dependencies->pear->minimum_version);
             $package->setPearinstallerDep(
                 $this->_dependencies->pear->minimum_version,

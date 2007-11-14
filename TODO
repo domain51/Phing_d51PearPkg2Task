@@ -1,0 +1,6 @@
+Floating tasks prior to first beta
+----------------------------------
+* Add bundle support (may require looking outside the PackageFileManager code as it doesn't
+  appear to be able to create the XML itself)
+* Add support for custom tasks
+

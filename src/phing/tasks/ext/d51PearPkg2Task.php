@@ -83,7 +83,11 @@ class d51PearPkg2Task extends Task
         PEAR_Frontend::setFrontendObject(new d51PearPkg2Task_Frontend($this));
         $package = new PEAR_PackageFileManager2();
         $this->_initOptions();
-        $package->setOptions($this->_options);
+        $a = $package->setOptions($this->_options);
+        if (PEAR::isError($a)) {
+            $this->log($a->getMessage(), Project::MSG_ERR);
+            exit(-1);
+        }
         
         $package->setPackage((string)$this->_name);
         $package->setSummary((string)$this->_summary);

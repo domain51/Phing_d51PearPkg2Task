@@ -6,12 +6,16 @@
     <includepath classpath="${project.basedir}/src" />
     <taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
     
-    <property name="version" value="0.6.2.1" />
+    <property name="version" value="0.6.3" />
     
     <target name="export">
         <echo msg="Exporting SVN files" />
         <delete dir="./build" />
-        <exec command="svn export ./src ./build" />
+        <copy todir="./build/phing">
+            <fileset dir="./src/phing">
+                <include name="*/**" />
+            </fileset>
+        </copy>
     </target>
     
     <target name="build" depends="export">
@@ -29,24 +33,35 @@
             	available by using PEAR_PackageFileManager2.
             </description>
             
-            <lead user="tswicegood" name="Travis Swicegood" email="developer@domain51.com" />
+            <lead user="tswicegood" name="Travis Swicegood" email="travis@domain51.com" />
             <license>LGPL</license>
             
-            <version release="${version}" api="0.1" />
+            <version release="${version}" api="1.0" />
             <stability release="alpha" api="alpha" />
             
             <dependencies>
                 <php minimum_version="5.2.0" />
                 
-                <pear minimum_version="1.6.0"
-                      recommended_version="1.6.1" />
+                <pear minimum_version="1.6.0" />
                 
                 <package name="PEAR_PackageFileManager"
                          channel="pear.php.net"
-                         recommended_version="1.6.1"
                          minimum_version="1.6.0" />
             </dependencies>
-            
+
+            <changelog version="0.6.3" date="2010-08-30" license="LGPL">
+                <!--        Don't exceed this width         -->
+                Fixes a few internal issues:
+
+                * Fixes an issue where setOptions() fails and
+                  it doesn't complain.
+                * Update the internal the build.xml file to
+                  work with its new Git home.
+                * Remove recommended_version against PEAR since
+                  the original implementor in PEAR doesn't have
+                  a clue how that should have really worked.
+            </changelog>
+
             <changelog version="0.6.2.1" date="2007-10-19" license="LGPL">
                 Fix issue introduced by previous "fix"
             </changelog>
@@ -159,7 +174,7 @@
         <delete file="Phing_d51PearPkg2Task-${version}.tgz" />
         <tar compression="gzip" destfile="Phing_d51PearPkg2Task-${version}.tgz" basedir="./build" />
     </target>
-    
+
     <target name="docs" depends="export">
         <echo msg="Creating documentation" />
         <phpdoc title="Phing_d51PearPkg2Task Docs" 

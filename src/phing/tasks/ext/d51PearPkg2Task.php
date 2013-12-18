@@ -306,7 +306,23 @@ class d51PearPkg2Task extends Task
     {
         $this->_type = $type;
     }
-    
+
+    /**
+     * Handle <exceptions> elements
+     *
+     * This corresponds to the ignore options present in
+     * {@link PEAR_PackageFileManager2::setOptions}.
+     *
+     *
+     * @return d51PearPkg2Task_KeyedContainer
+     */
+    public function createExceptions()
+    {
+        $exception = new d51PearPkg2Task_KeyedContainer();
+        $this->_options['exceptions'][] = $exception;
+        return $exception;
+    }
+
     /**
      * Handle <installexceptions> elements
      * 
